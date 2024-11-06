@@ -1,6 +1,7 @@
 import { useState } from "react"
 import Button from "../components/Button"
 import Input from "../components/Input"
+import axios from "axios"
 
 const Signup = () => {
 
@@ -10,15 +11,29 @@ const Signup = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
+  const SignUp = async () => {
+    try {
+      const response = await axios.post("your api url",{
+        name,
+        username,
+        password,
+        email,
+        number
+      })
+      if (response.status === 200) alert("User signed in")
+    } catch (error) {
+      alert(error.message)
+    }
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(name);
-    alert("Signed in");
     setName("")
     setEmail("")
     setPassword("")
     setNumber("")
     setUsername("")
+    SignUp();
   }
 
   return (
